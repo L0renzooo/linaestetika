@@ -12,7 +12,7 @@ export const siteConfig = {
   description:
     "Estetická medicína v Senci. Botulotoxín, kyselina hyalurónová, Profhilo, polynukleotidy, Sculptra a biorevitalizácia pleti — s individuálnym prístupom a dôrazom na prirodzený výsledok.",
   address: {
-    street: "Mierové námestie 11",
+    street: "Námestie 1. mája 20/1",
     city: "Senec",
     country: "Slovensko",
     countryCode: "SK",
