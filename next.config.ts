@@ -8,6 +8,6 @@ const nextConfig: NextConfig = {
     // Remove this once the client's own licensed photography is in /public/images.
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
   },
-};
+}; 
 
 export default nextConfig;
