@@ -2,8 +2,6 @@ import { pageMetadata } from "@/lib/metadata";
 import { PageHero } from "@/components/layout/PageHero";
 import { TreatmentExplorer } from "@/components/treatments/TreatmentExplorer";
 import { CtaBand } from "@/components/ui/CtaBand";
-import { treatments } from "@/data/treatments";
-import { services } from "@/data/services";
 
 export const metadata = pageMetadata({
   title: "Ošetrenia — estetická medicína Senec",
@@ -24,7 +22,7 @@ export default function TreatmentsPage() {
             Všetky ošetrenia <strong className="font-medium">na jednom mieste.</strong>
           </>
         }
-        lead={`${treatments.length} ošetrení a ${services.length} služieb z nášho rezervačného systému. Filtrujte podľa kategórie alebo vyhľadajte konkrétne ošetrenie.`}
+        lead={`Objavte naše ošetrenia tváre, pleti aj tela. Filtrujte podľa kategórie alebo vyhľadajte konkrétne ošetrenie.`}
       />
       <section aria-label="Zoznam ošetrení" className="section-y pt-10 lg:pt-12">
         <div className="container-site">

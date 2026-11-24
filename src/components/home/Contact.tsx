@@ -39,7 +39,7 @@ export function Contact({ headingLevel = "h2", id = "kontakt" }: { headingLevel?
                 </a>
               </Item>
               <Item icon={<CalendarIcon className="size-5" />} label="Rezervácie">
-                Online cez rezervačný systém Bookio — vyberte si ošetrenie aj termín.
+                Pohodlne online — vyberte si ošetrenie aj voľný termín.
               </Item>
             </dl>
 

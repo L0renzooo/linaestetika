@@ -39,7 +39,7 @@ export const signatureConcepts: SignatureConcept[] = [
     title: "Sviežosť krku a dekoltu",
     description:
       "Individuálna starostlivosť zameraná na regeneráciu, pružnosť a zlepšenie vzhľadu pokožky krku a dekoltu.",
-    image: images.decollete,
+    image: images.neck,
     related: [],
   },
 ];

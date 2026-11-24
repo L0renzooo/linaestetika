@@ -36,7 +36,7 @@ export default function ResultsPage() {
             Výsledky, <strong className="font-medium">ktorým môžete veriť.</strong>
           </>
         }
-        lead="Galériu výsledkov pripravujeme. Zverejníme len fotografie, ktoré spĺňajú naše pravidlá."
+        lead="Fotografie výsledkov zverejňujeme výhradne so súhlasom klientov a s ohľadom na ich súkromie."
       />
       <section aria-labelledby="pravidla" className="section-y">
         <div className="container-site grid gap-x-12 gap-y-8 lg:grid-cols-12">

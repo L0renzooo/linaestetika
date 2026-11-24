@@ -30,7 +30,7 @@ export function PricingPreview() {
             />
             <Reveal>
               <p className="mt-5 max-w-[420px] text-muted">
-                Ceny vychádzajú priamo z nášho rezervačného systému Bookio. Výber ošetrenia aj rozsah s vami vždy preberieme pred jeho začatím.
+                Prehľadné ceny vám uľahčia rozhodovanie. Výber ošetrenia aj jeho rozsah s vami vždy preberieme pred jeho začatím.
               </p>
               <Link href="/cennik" className={buttonClass("outline", "md", "mt-7")}>
                 Zobraziť celý cenník <ArrowIcon className="size-4" />
@@ -41,7 +41,7 @@ export function PricingPreview() {
             <div className="rounded-[18px] bg-white px-5 sm:px-7">
               <PriceList items={items} />
             </div>
-            <p className="mt-4 px-1 text-[12.5px] text-peach-ink">Ceny overené v Bookio dňa {checked}.</p>
+            <p className="mt-4 px-1 text-[12.5px] text-peach-ink">Ceny platné k {checked}.</p>
           </Reveal>
         </div>
       </div>

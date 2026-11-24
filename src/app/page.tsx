@@ -28,7 +28,7 @@ export default function HomePage() {
                 Vyberte oblasť, <strong className="font-medium">ktorá vás zaujíma.</strong>
               </>
             }
-            lead="Na mape sú vyznačené len oblasti, pre ktoré máme konkrétnu službu v rezervačnom systéme — aj s aktuálnou cenou."
+            lead="Vyberte oblasť, ktorej chcete venovať pozornosť, a objavte možnosti individuálneho ošetrenia."
           />
           <div className="mt-10 lg:mt-12">
             <FaceMap showOffMap />

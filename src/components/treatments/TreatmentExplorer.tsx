@@ -122,7 +122,7 @@ export function TreatmentExplorer({ mode = "category", withSearch = true }: { mo
               <p className="text-[11px] font-semibold tracking-[0.14em] text-peach-ink uppercase">LINA Signature</p>
               <h3 className="mt-2 text-[1.1875rem] font-medium">{neck.title}</h3>
               <p className="mt-2 text-small text-ink/75">{neck.description}</p>
-              <p className="mt-3 text-[13px] text-ink/70">Pre oblasť krku a dekoltu zatiaľ nemáme samostatnú službu v cenníku — postup navrhneme individuálne.</p>
+              <p className="mt-3 text-[13px] text-ink/70">Starostlivosť o krk a dekolt vždy prispôsobujeme individuálne — vhodný postup navrhneme pri konzultácii.</p>
               <div className="mt-auto pt-5">
                 <BookingButton size="sm" />
               </div>

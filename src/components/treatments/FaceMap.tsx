@@ -98,7 +98,7 @@ export function FaceMap({ zoneIds, showOffMap = false, linkTreatments = true }: 
               </button>
             );
           })}
-          <p className="absolute bottom-3 left-3 rounded-full bg-white/80 px-3 py-1 text-[11px] text-ink/70 backdrop-blur">Ilustračná fotografia</p>
+          <p className="absolute bottom-3 left-3 rounded-full bg-white/80 px-3 py-1 text-[11px] text-ink/70 backdrop-blur">Individuálny prístup</p>
         </div>
       </div>
 
@@ -159,7 +159,7 @@ export function FaceMap({ zoneIds, showOffMap = false, linkTreatments = true }: 
 
         {showOffMap && (
           <div className="rounded-[24px] border border-line p-6">
-            <p className="text-[11px] font-semibold tracking-[0.14em] text-ink/55 uppercase">Ošetrenia bez vyznačenia na mape</p>
+            <p className="text-[11px] font-semibold tracking-[0.14em] text-ink/55 uppercase">Ďalšie ošetrenia tváre a tela</p>
             <ul className="mt-3 divide-y divide-line">
               {offMapServiceGroups.map((g) => {
                 const min = Math.min(...g.serviceIds.map((id) => getService(id).price));

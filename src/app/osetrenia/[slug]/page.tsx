@@ -54,7 +54,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
 
   const steps = [
     { title: "Konzultácia", text: "Pred ošetrením sa porozprávame o vašich predstavách, zdravotnom stave a o tom, či je ošetrenie pre vás vhodné." },
-    { title: "Ošetrenie", text: "Ošetrenie prebieha v pokojnom prostredí a s dôrazom na váš komfort.", meta: `Dĺžka termínu v Bookio: ${durationLabel}` },
+    { title: "Ošetrenie", text: "Ošetrenie prebieha v pokojnom prostredí a s dôrazom na váš komfort.", meta: `Dĺžka termínu: ${durationLabel}` },
     { title: "Po ošetrení", text: "Dostanete odporúčania, ako sa o ošetrenú oblasť starať. Ak bude potrebné, dohodneme ďalší postup." },
   ];
 
@@ -119,7 +119,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
       {t.module === "variants" && (
         <section aria-labelledby="varianty" className="section-y bg-peach-soft">
           <div className="container-site">
-            <SectionHeader eyebrow="Varianty" id="varianty" title={<>Vyberte si <strong className="font-medium">rozsah ošetrenia</strong></>} lead="Varianty zodpovedajú službám v našom rezervačnom systéme. Vhodný rozsah s vami preberieme pri konzultácii." />
+            <SectionHeader eyebrow="Varianty" id="varianty" title={<>Vyberte si <strong className="font-medium">rozsah ošetrenia</strong></>} lead="Ošetrenie ponúkame v niekoľkých variantoch. Vhodný rozsah s vami vždy preberieme pri konzultácii." />
             <div className="mt-10">
               <VariantSelector items={items} title={t.name} />
             </div>
@@ -202,7 +202,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
             <h2 id="cennik-title" className="type-h2 mt-4">
               {t.name} <strong className="font-medium">— cenník</strong>
             </h2>
-            <p className="mt-4 max-w-[420px] text-muted">Ceny podľa rezervačného systému Bookio. Pri rezervácii si vyberte konkrétnu službu.</p>
+            <p className="mt-4 max-w-[420px] text-muted">Prehľad aktuálnych cien. Pri online rezervácii si vyberte konkrétnu službu.</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <BookingButton />
               <Link href="/cennik" className={buttonClass("outline", "md")}>
@@ -231,7 +231,7 @@ export default async function TreatmentPage({ params }: { params: Promise<{ slug
                 <p className="type-eyebrow text-peach">LINA Signature · {signature.number}</p>
                 <h2 className="mt-4 text-[1.75rem] leading-tight font-extralight">{signature.title}</h2>
                 <p className="mt-4 text-[15px] leading-relaxed text-white/80">{signature.description}</p>
-                <p className="mt-4 text-[13px] text-white/60">Individuálny prístup, nie pevne daný protokol. Postup navrhneme po konzultácii.</p>
+                <p className="mt-4 text-[13px] text-white/60">Každý postup prispôsobujeme vám — navrhneme ho po osobnej konzultácii.</p>
                 <Link href="/#signature" className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-peach hover:text-white">
                   Viac o LINA Signature <ArrowIcon className="size-4" />
                 </Link>

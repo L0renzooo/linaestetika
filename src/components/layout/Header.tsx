@@ -4,12 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState, type FocusEvent as ReactFocusEvent, type KeyboardEvent } from "react";
 import { mainNav, treatmentsNav } from "@/data/navigation";
-import { siteConfig } from "@/config/site";
 import { BookingButton } from "@/components/ui/BookingButton";
 import { Logo } from "@/components/ui/Logo";
+import { MobileMenu } from "./MobileMenu";
 import { ArrowIcon, ChevronDownIcon } from "@/components/ui/icons";
 import { gsap, motion, useGSAP } from "@/components/motion/gsap";
-import { getLenis } from "@/lib/scroll";
 import { cn } from "@/lib/cn";
 
 const isActive = (pathname: string, href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
@@ -19,7 +18,6 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileGroup, setMobileGroup] = useState(false);
   const megaId = useId();
   const mobileId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -52,25 +50,14 @@ export function Header() {
         setMegaOpen(false);
         triggerRef.current?.focus();
       }
-      if (mobileOpen) {
-        setMobileOpen(false);
-        toggleRef.current?.focus();
-      }
+      if (mobileOpen) setMobileOpen(false); // MobileMenu restores focus to the trigger
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [megaOpen, mobileOpen]);
 
-  // Mobile drawer: pause smooth scroll + lock page scroll; close on desktop resize.
+  // Close the mobile menu when the viewport grows to desktop (scroll lock etc. lives in MobileMenu).
   useEffect(() => {
-    const lenis = getLenis();
-    if (mobileOpen) {
-      lenis?.stop();
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      lenis?.start();
-      document.documentElement.style.overflow = "";
-    }
     const mq = window.matchMedia("(min-width: 64rem)");
     const onMq = () => mq.matches && setMobileOpen(false);
     mq.addEventListener("change", onMq);
@@ -191,15 +178,19 @@ export function Header() {
           <button
             ref={toggleRef}
             type="button"
-            className="relative grid size-10 place-items-center rounded-full border border-line lg:hidden"
+            className={cn(
+              "relative grid size-10 place-items-center rounded-full border transition-[background-color,border-color,color] duration-500 lg:hidden",
+              mobileOpen ? "border-primary bg-primary text-white" : "border-line text-ink",
+            )}
             aria-expanded={mobileOpen}
             aria-controls={mobileId}
             aria-label={mobileOpen ? "Zavrieť menu" : "Otvoriť menu"}
             onClick={() => setMobileOpen((o) => !o)}
           >
-            <span aria-hidden className="relative block h-3 w-4">
-              <span className={cn("absolute left-0 h-[1.5px] w-4 rounded bg-ink transition-transform duration-300", mobileOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0.5")} />
-              <span className={cn("absolute left-0 h-[1.5px] w-4 rounded bg-ink transition-transform duration-300", mobileOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0.5")} />
+            <span aria-hidden className="relative block h-3 w-[18px]">
+              <span className={cn("absolute left-0 top-0 h-[1.5px] w-full origin-center rounded bg-current transition-transform duration-500 ease-[var(--ease-out-expo)]", mobileOpen && "translate-y-[5.25px] rotate-45")} />
+              <span className={cn("absolute top-1/2 right-0 h-[1.5px] w-2/3 -translate-y-1/2 rounded bg-current transition-[opacity,transform] duration-300", mobileOpen && "scale-x-0 opacity-0")} />
+              <span className={cn("absolute bottom-0 left-0 h-[1.5px] w-full origin-center rounded bg-current transition-transform duration-500 ease-[var(--ease-out-expo)]", mobileOpen && "-translate-y-[5.25px] -rotate-45")} />
             </span>
           </button>
         </div>
@@ -218,7 +209,7 @@ export function Header() {
               <div>
                 <p className="type-eyebrow text-peach-ink">Ošetrenia</p>
                 <p className="mt-3 text-[15px] leading-relaxed text-ink/80">
-                  Všetky služby a ceny vychádzajú z nášho rezervačného systému Bookio.
+                  Prirodzené výsledky a starostlivosť prispôsobená práve vašej pleti.
                 </p>
               </div>
               <ul className="mt-6 space-y-1.5">
@@ -264,64 +255,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
-      <div
-        id={mobileId}
-        hidden={!mobileOpen}
-        data-lenis-prevent
-        className="fixed inset-x-0 top-[var(--header-h)] bottom-0 overflow-y-auto overscroll-contain border-t border-line bg-white lg:hidden"
-      >
-        <nav aria-label="Mobilná navigácia" className="container-site flex min-h-full flex-col py-4">
-          <ul className="divide-y divide-line">
-            {mainNav.slice(0, 3).map((item) => (
-              <MobileLink key={item.href} href={item.href} label={item.label} active={isActive(pathname, item.href)} />
-            ))}
-            <li>
-              <button
-                type="button"
-                aria-expanded={mobileGroup}
-                onClick={() => setMobileGroup((o) => !o)}
-                className="flex min-h-14 w-full items-center justify-between py-3 text-left text-[17px] font-medium"
-              >
-                Ošetrenia
-                <ChevronDownIcon className={cn("size-4 transition-transform duration-300", mobileGroup && "rotate-180")} />
-              </button>
-              <div className={cn("grid transition-[grid-template-rows] duration-500 ease-[var(--ease-out-expo)]", mobileGroup ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
-                <div className="overflow-hidden">
-                  <div className="mb-4 space-y-4 rounded-2xl bg-peach-soft p-4">
-                    {treatmentsNav.groups.map((group) => (
-                      <div key={group.id}>
-                        <p className="text-[11px] font-semibold tracking-[0.14em] text-ink/55 uppercase">{group.label}</p>
-                        <ul className="mt-1">
-                          {group.links.map((link) => (
-                            <li key={link.href}>
-                              <Link href={link.href} tabIndex={mobileGroup ? 0 : -1} className="flex min-h-11 items-center text-[15px]">
-                                {link.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                    <Link href="/osetrenia" tabIndex={mobileGroup ? 0 : -1} className="flex min-h-11 items-center gap-2 text-[15px] font-medium text-primary">
-                      Všetky ošetrenia <ArrowIcon className="size-4" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </li>
-            {mainNav.slice(3).map((item) => (
-              <MobileLink key={item.href} href={item.href} label={item.label} active={isActive(pathname, item.href)} />
-            ))}
-          </ul>
-          <div className="mt-auto space-y-3 pt-8">
-            <BookingButton className="w-full" />
-            <a href={siteConfig.phone.href} className="flex min-h-11 items-center justify-center text-sm text-muted">
-              {siteConfig.phone.display}
-            </a>
-          </div>
-        </nav>
-      </div>
+      <MobileMenu id={mobileId} open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} triggerRef={toggleRef} />
     </header>
   );
 }
@@ -351,13 +285,3 @@ function NavLink({ href, label, active }: { href: string; label: string; active:
   );
 }
 
-function MobileLink({ href, label, active }: { href: string; label: string; active: boolean }) {
-  return (
-    <li>
-      <Link href={href} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 items-center justify-between py-3 text-[17px] font-medium", active && "text-primary")}>
-        {label}
-        <ArrowIcon className="size-4 text-muted" />
-      </Link>
-    </li>
-  );
-}

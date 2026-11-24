@@ -81,7 +81,7 @@ export function Footer() {
         <p>
           © {year} {siteConfig.name}. Všetky práva vyhradené.
         </p>
-        <p>Informácie na webe majú informatívny charakter. Fotografie sú ilustračné.</p>
+        <p>Všeobecné podmienky</p>
       </div>
     </footer>
   );

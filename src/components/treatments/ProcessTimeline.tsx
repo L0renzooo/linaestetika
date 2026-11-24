@@ -25,7 +25,7 @@ export function ProcessTimeline({ steps, title = "Ako prebieha ošetrenie", lead
             onEnter: () => step.setAttribute("data-on", ""),
             onLeaveBack: () => step.removeAttribute("data-on"),
           });
-          gsap.from(step.querySelector("[data-step-card]"), { autoAlpha: 0, x: 24, duration: 0.8, ease: motion.ease, scrollTrigger: { trigger: step, start: "top 85%", once: true } });
+          gsap.from(step.querySelector("[data-step-card]"), { autoAlpha: 0, y: 18, duration: 0.8, ease: motion.ease, scrollTrigger: { trigger: step, start: "top 85%", once: true } });
         });
       });
       mm.add(motion.noMotion, () => {
@@ -49,14 +49,14 @@ export function ProcessTimeline({ steps, title = "Ako prebieha ošetrenie", lead
         <span aria-hidden className="absolute top-2 bottom-2 left-[19px] w-px bg-line" />
         <span aria-hidden data-progress className="absolute top-2 bottom-2 left-[19px] w-px origin-top bg-primary" />
         {steps.map((s, i) => (
-          <li key={s.title} data-step className="group relative flex gap-6 pb-6 last:pb-0">
+          <li key={s.title} data-step className="group relative flex gap-4 pb-6 last:pb-0 sm:gap-6">
             <span className="relative z-10 grid size-10 shrink-0 place-items-center rounded-full border border-line bg-white text-[13px] font-semibold tabular-nums transition-[background-color,border-color,color] duration-500 group-data-[on]:border-primary group-data-[on]:bg-primary group-data-[on]:text-white">
               {String(i + 1).padStart(2, "0")}
             </span>
-            <div data-step-card className="flex-1 rounded-[20px] border border-line bg-white p-5 transition-shadow duration-500 group-data-[on]:shadow-[0_20px_40px_-30px_rgb(36_36_36/0.45)] sm:p-6">
+            <div data-step-card className="min-w-0 flex-1 rounded-[20px] border border-line bg-white p-5 transition-shadow duration-500 group-data-[on]:shadow-[0_20px_40px_-30px_rgb(36_36_36/0.45)] sm:p-6">
               <h3 className="text-[17px] font-medium">{s.title}</h3>
               <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{s.text}</p>
-              {s.meta && <p className="mt-3 inline-flex rounded-full bg-peach-100 px-3 py-1 text-[12px] font-medium text-peach-ink">{s.meta}</p>}
+              {s.meta && <p className="mt-3 inline-flex max-w-full rounded-full bg-peach-100 px-3 py-1 text-[12px] leading-snug font-medium text-peach-ink">{s.meta}</p>}
             </div>
           </li>
         ))}

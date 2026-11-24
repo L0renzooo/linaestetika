@@ -10,7 +10,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 export const metadata = pageMetadata({
   title: "Estetická medicína pre dámy",
   description:
-    "Ošetrenia pre dámy v Senci — kvalita pleti, hydratácia, pery, očné okolie a jemná modelácia tváre. Individuálny prístup a ceny podľa rezervačného systému Bookio.",
+    "Ošetrenia pre dámy v Senci — kvalita pleti, hydratácia, pery, očné okolie a jemná modelácia tváre. Individuálny prístup a prehľadné ceny.",
   path: "/damy",
 });
 

@@ -8,7 +8,8 @@ import { Eyebrow } from "./Eyebrow";
 /** Closing booking band used at the end of subpages. */
 export function CtaBand({ title = "Prvý krok je jednoduchý.", text }: { title?: string; text?: string }) {
   return (
-    <section aria-label="Rezervácia" className="section-y pt-0">
+    // Explicit white breathing room above the panel so it never looks glued to the previous section.
+    <section aria-label="Rezervácia" className="bg-white pt-[clamp(3rem,6vw,5.5rem)] pb-[var(--section-y)]">
       <div className="container-site">
         <Reveal className="relative isolate overflow-hidden rounded-[28px] bg-peach-100 px-6 py-12 sm:px-12 lg:px-16 lg:py-16">
           <Image
@@ -22,7 +23,7 @@ export function CtaBand({ title = "Prvý krok je jednoduchý.", text }: { title?
           <Eyebrow>Rezervácia</Eyebrow>
           <h2 className="type-h2 mt-4 max-w-[18ch]">{title}</h2>
           <p className="mt-4 max-w-[52ch] text-muted">
-            {text ?? "Vyberte si ošetrenie a voľný termín v našom rezervačnom systéme Bookio. Ak máte otázky, zavolajte nám."}
+            {text ?? "Vyberte si ošetrenie a voľný termín pohodlne online. Ak máte akékoľvek otázky, radi vám poradíme aj telefonicky."}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <BookingButton />

@@ -20,7 +20,7 @@ export const metadata = pageMetadata({
 const principles = [
   "Prirodzený výsledok, ktorý nemení váš výraz",
   "Diskrétny a vecný prístup",
-  "Rovnaké overené ošetrenia ako pre dámy — prispôsobené vašim črtám",
+  "Rovnaké ošetrenia ako pre dámy — vždy prispôsobené vašim črtám",
 ];
 
 export default function MenPage() {

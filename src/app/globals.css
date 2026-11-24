@@ -183,6 +183,28 @@
   }
 }
 
+/* Hero portrait: dissolve the photo edges into the section background (face stays sharp). */
+/* Mobile: compact portrait directly under the header (no top fade), soft fade into the copy below. */
+.hero-mask {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgb(0 0 0 / 0.55) 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 70%, rgb(0 0 0 / 0.55) 86%, transparent 100%);
+  /* no tiling: on fractional-pixel boxes a repeated mask leaks a 1px opaque seam at the edge */
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+/* Desktop: full-bleed to the right edge. The fade comes only from the LEFT (into the peach
+   behind the copy); right and top stay untouched, bottom gets a very light settle. */
+@media (min-width: 64rem) {
+  /* Single mask layer on purpose: a composited (intersect) second layer leaves a 1px seam
+     at the left edge in Chromium. The light bottom settle is an overlay in Hero.tsx instead. */
+  .hero-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 6%, rgb(0 0 0 / 0.12) 16%, rgb(0 0 0 / 0.42) 26%, rgb(0 0 0 / 0.78) 36%, #000 46%);
+    mask-image: linear-gradient(to right, transparent 0%, transparent 6%, rgb(0 0 0 / 0.12) 16%, rgb(0 0 0 / 0.42) 26%, rgb(0 0 0 / 0.78) 36%, #000 46%);
+  }
+}
+
 /* Slow treatment ticker (paused for reduced motion and on hover) */
 @keyframes marquee {
   to {

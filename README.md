@@ -52,7 +52,18 @@ GSAP via `useGSAP` (auto cleanup) inside `gsap.matchMedia` (reduced motion respe
 
 ## Image credits
 
-Unsplash License (free commercial use). Illustrative models only — not clients, staff or results. Sources are listed per image in `src/data/images.ts`.
+All editorial photos are stored locally in `public/images/editorial/` (downloaded 2026-11-24, 1800 px, optimised by `next/image`).
+Unsplash License (free commercial use, no attribution required). Illustrative models only — not clients, staff or results.
+The Unsplash source page of every image is recorded in `src/data/images.ts` (`source` field).
+
+Art direction: warm, bright, soft daylight, natural skin. The LINA Signature trio (`eye-closeup`, `lips-natural`, `neck-hand`)
+was chosen as one set (light warm skin tones, neutral light backgrounds). Hero: `hero-blonde`.
+
+## Interaction components (iteration 3)
+
+- `components/home/Hero.tsx` — portrait dissolves into the peach background via CSS mask (`.hero-mask` in globals.css).
+- `components/home/ExpandingCards.tsx` — desktop flex-grow expanding cards (hover/focus); mobile/tablet snap carousel with active card + dots.
+- `components/layout/MobileMenu.tsx` — GSAP-choreographed menu (single timeline, play/reverse), `inert` background, scroll lock, focus return.
 
 ## Open items (see handoff)
 

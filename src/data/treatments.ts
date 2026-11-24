@@ -187,7 +187,7 @@ export const treatments: Treatment[] = [
     ],
     related: ["pery", "botulotoxin", "profhilo"],
     priceNote:
-      "Služba „Výplň nazolabiálnych vrások“ je v Bookio momentálne uvedená dvakrát s rozdielnou cenou. Aktuálnu cenu vám potvrdíme pri rezervácii.",
+      "Konečnú cenu výplne nazolabiálnych vrások vám radi potvrdíme ešte pred ošetrením.",
   },
   {
     slug: "pery",

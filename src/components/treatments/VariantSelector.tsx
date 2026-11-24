@@ -62,7 +62,7 @@ export function VariantSelector({ items, title }: { items: Service[]; title: str
             );
           }}
         />
-        <p className="mt-3 text-[13px] text-muted">Vyberte variant šípkami alebo kliknutím. Ceny podľa rezervačného systému Bookio.</p>
+        <p className="mt-3 text-[13px] text-muted">Vyberte variant šípkami alebo kliknutím a zobrazte si jeho detail.</p>
       </div>
 
       <div ref={panel} aria-live="polite" className="flex flex-col rounded-[24px] bg-peach-100 p-6 sm:p-8 lg:col-span-5">
@@ -83,7 +83,7 @@ export function VariantSelector({ items, title }: { items: Service[]; title: str
           </div>
         </dl>
         <p data-panel-item className="mt-5 text-[14px] leading-relaxed text-ink/75">
-          Presný rozsah ošetrenia vždy prekonzultujeme pred jeho začatím. V Bookio nájdete túto službu ako „{selected.bookioName}“.
+          Presný rozsah ošetrenia vždy prekonzultujeme pred jeho začatím, aby výsledok pôsobil prirodzene a harmonicky.
         </p>
         <div data-panel-item className="mt-auto pt-6">
           <BookingButton />
