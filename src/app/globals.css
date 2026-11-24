@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   LINA ESTETIKA — design tokens
+   Core brand colours are fixed: #D84557 / #FFC2A0 / #FFFFFF / #242424.
+   Everything else is a neutral support tone or a tint of the peach.
+------------------------------------------------------------------- */
+@theme {
+  /* Colour */
+  --color-primary: #d84557;
+  --color-primary-hover: #c73a4c;
+  --color-primary-soft: #fcecee;
+  --color-peach: #ffc2a0;
+  --color-peach-soft: #fff4ee; /* section wash */
+  --color-peach-100: #ffeadf; /* panels, selected surfaces */
+  --color-peach-200: #ffd9c4; /* accents, hover fills */
+  --color-peach-line: #ffe1d0;
+  --color-peach-ink: #8a4a2c; /* small text on peach (AA on peach-100) */
+  --color-paper: #ffffff;
+  --color-ink: #242424;
+  --color-muted: #6b6b6b;
+  --color-surface: #f7f7f7;
+  --color-surface-2: #f2f2f2;
+  --color-line: #e8e8e8;
+
+  /* Typography — ITC Avant Garde Gothic Pro (local, see src/lib/fonts.ts) */
+  --font-sans: var(--font-avant), ui-sans-serif, system-ui, sans-serif;
+
+  --text-eyebrow: 0.75rem; /* 12 */
+  --text-eyebrow--letter-spacing: 0.16em;
+  --text-eyebrow--line-height: 1.4;
+  --text-small: 0.875rem; /* 14 */
+  --text-small--line-height: 1.55;
+  --text-body: 1rem; /* 16 */
+  --text-body--line-height: 1.65;
+  --text-lead: 1.0625rem; /* 17 */
+  --text-lead--line-height: 1.65;
+  --text-card: 1.1875rem; /* 19 */
+  --text-card--line-height: 1.3;
+
+  /* Radii */
+  --radius-sm: 0.625rem; /* 10 */
+  --radius-md: 1rem; /* 16 */
+  --radius-lg: 1.25rem; /* 20 */
+  --radius-xl: 1.5rem; /* 24 */
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Breakpoints (Tailwind defaults kept explicit for documentation) */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+:root {
+  /* Layout */
+  --content-max: 1300px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+  --header-h: 72px;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 80px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: var(--header-h);
+    background: var(--color-paper);
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-peach);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  [tabindex="-1"]:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Layout primitives
+------------------------------------------------------------------- */
+@utility container-site {
+  width: 100%;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+/* Display type — thin/heavy contrast is part of the identity */
+@utility type-display {
+  font-weight: 200;
+  font-size: clamp(2.125rem, 1.35rem + 2.6vw, 3.5rem); /* 34 → 56 */
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+@utility type-h2 {
+  font-weight: 200;
+  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.5rem); /* 28 → 40 */
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+@utility type-h3 {
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem); /* 20 → 24 */
+  line-height: 1.25;
+  letter-spacing: -0.012em;
+}
+
+@utility type-eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------
+   Progressive-enhancement for motion.
+   `.js` is set before paint (see layout.tsx). Elements that GSAP
+   reveals start hidden only when JS is available and motion is allowed.
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal="self"]:not([data-revealed]),
+  .js [data-reveal="items"]:not([data-revealed]) [data-reveal-item],
+  .js [data-split] {
+    visibility: hidden;
+    /* Failsafe: if GSAP never initialises, content still appears. */
+    animation: reveal-failsafe 0s linear 2.5s forwards;
+  }
+}
+
+@keyframes reveal-failsafe {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Slow treatment ticker (paused for reduced motion and on hover) */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee-track {
+  animation: marquee 48s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Split-text line masks */
+.split-line-mask {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Hide scrollbar for snap rails but keep them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes focus-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(216 69 87 / 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgb(216 69 87 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
